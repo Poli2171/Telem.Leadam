@@ -1,4 +1,5 @@
 import ScrollRevealProvider from '@/components/ScrollRevealProvider'
+import StickyDonateButton from '@/components/StickyDonateButton'
 import Header from '@/components/sections/Header'
 import HeroSection from '@/components/sections/HeroSection'
 import AboutSection from '@/components/sections/AboutSection'
@@ -35,6 +36,9 @@ export default function HomePage() {
         <ContactSection />
       </main>
       <Footer />
+      <StickyDonateButton />
+      {/* Bottom padding on mobile so sticky button doesn't cover content */}
+      <div className="md:hidden h-16" />
     </ScrollRevealProvider>
   )
 }

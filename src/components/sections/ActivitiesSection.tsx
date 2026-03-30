@@ -75,7 +75,7 @@ export default function ActivitiesSection() {
               </div>
 
               {/* Text */}
-              <div className="p-6">
+              <div className="p-6 text-center md:text-right">
                 <h3 className="text-xl font-bold text-secondary-dark mb-2">{activity.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{activity.description}</p>
               </div>

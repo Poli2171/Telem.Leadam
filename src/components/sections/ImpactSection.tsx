@@ -58,7 +58,7 @@ export default function ImpactSection() {
         {/* Goals */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 reveal reveal-delay-2">
           {goals.map((goal, i) => (
-            <div key={i} className="bg-white rounded-2xl p-6 shadow-sm border border-earth/20 flex items-start gap-5 hover:shadow-md transition-shadow">
+            <div key={i} className="bg-white rounded-2xl p-6 shadow-sm border border-earth/20 flex flex-col items-center text-center md:flex-row md:items-start md:text-right gap-5 hover:shadow-md transition-shadow">
               <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
                 {goal.icon}
               </div>

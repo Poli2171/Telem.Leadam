@@ -53,7 +53,7 @@ export default function AudiencesSection() {
               key={i}
               className={`reveal reveal-delay-${i + 1} bg-gradient-to-br ${item.gradient} rounded-2xl p-8 border border-earth/10 hover:shadow-lg transition-all duration-300`}
             >
-              <div className="flex items-start gap-5">
+              <div className="flex flex-col items-center text-center md:flex-row md:items-start md:text-right gap-5">
                 <div className={`w-16 h-16 rounded-2xl ${item.iconColor} flex items-center justify-center flex-shrink-0`}>
                   {item.icon}
                 </div>

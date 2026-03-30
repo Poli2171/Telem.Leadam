@@ -70,7 +70,7 @@ export default function ProcessSection() {
                 {/* Content */}
                 <div className={`md:w-[calc(50%-2rem)] ${i % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
                   <div className="bg-white rounded-2xl p-6 shadow-sm border border-earth/20 hover:shadow-md transition-shadow group">
-                    <div className="flex items-start gap-4">
+                    <div className="flex flex-col items-center text-center md:flex-row md:items-start md:text-right gap-4">
                       <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
                         {step.icon}
                       </div>

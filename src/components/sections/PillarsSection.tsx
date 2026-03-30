@@ -62,17 +62,19 @@ export default function PillarsSection() {
                 i === 0 ? 'bg-primary' : i === 1 ? 'bg-rose-400' : 'bg-sky-400'
               }`} />
 
-              <div className={`w-20 h-20 rounded-2xl ${pillar.iconBg} ${pillar.iconColor} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+              <div className={`w-20 h-20 rounded-2xl ${pillar.iconBg} ${pillar.iconColor} flex items-center justify-center mb-6 mx-auto md:mx-0 group-hover:scale-110 transition-transform duration-300`}>
                 {pillar.icon}
               </div>
 
-              <h3 className="text-2xl font-black text-secondary-dark mb-2">{pillar.title}</h3>
-              <p className={`text-sm font-medium mb-4 ${
-                i === 0 ? 'text-primary' : i === 1 ? 'text-rose-500' : 'text-sky-600'
-              }`}>
-                {pillar.subtitle}
-              </p>
-              <p className="text-gray-600 leading-relaxed">{pillar.description}</p>
+              <div className="text-center md:text-right">
+                <h3 className="text-2xl font-black text-secondary-dark mb-2">{pillar.title}</h3>
+                <p className={`text-sm font-medium mb-4 ${
+                  i === 0 ? 'text-primary' : i === 1 ? 'text-rose-500' : 'text-sky-600'
+                }`}>
+                  {pillar.subtitle}
+                </p>
+                <p className="text-gray-600 leading-relaxed">{pillar.description}</p>
+              </div>
             </div>
           ))}
         </div>
