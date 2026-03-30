@@ -1,0 +1,137 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model AdminUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SiteSettings {
+  id             String  @id @default("main")
+  siteName       String  @default("תלם לאדם")
+  seoTitle       String  @default("תלם לאדם - מטפלים מהשורש")
+  seoDescription String  @default("חווה חקלאית חינוכית-טיפולית למניעת נשירה ואי תפקוד של בני ובנות נוער")
+  ogImage        String?
+  donationLink   String?
+  phone          String?
+  email          String?
+  address        String?
+  whatsapp       String?
+  facebook       String?
+  instagram      String?
+  footerText     String?
+}
+
+model Section {
+  id        String   @id
+  type      String
+  content   String // JSON
+  sortOrder Int      @default(0)
+  visible   Boolean  @default(true)
+  updatedAt DateTime @updatedAt
+}
+
+model TeamMember {
+  id        String  @id @default(cuid())
+  name      String
+  role      String
+  bio       String
+  image     String?
+  sortOrder Int     @default(0)
+  visible   Boolean @default(true)
+}
+
+model Pillar {
+  id          String  @id @default(cuid())
+  title       String
+  description String
+  icon        String
+  sortOrder   Int     @default(0)
+  visible     Boolean @default(true)
+}
+
+model Activity {
+  id          String  @id @default(cuid())
+  title       String
+  description String
+  icon        String
+  sortOrder   Int     @default(0)
+  visible     Boolean @default(true)
+}
+
+model ProcessStep {
+  id          String  @id @default(cuid())
+  title       String
+  description String
+  stepNumber  Int
+  icon        String?
+  sortOrder   Int     @default(0)
+  visible     Boolean @default(true)
+}
+
+model Audience {
+  id          String  @id @default(cuid())
+  title       String
+  description String
+  icon        String
+  sortOrder   Int     @default(0)
+  visible     Boolean @default(true)
+}
+
+model ImpactMetric {
+  id        String  @id @default(cuid())
+  label     String
+  value     String
+  icon      String?
+  sortOrder Int     @default(0)
+  visible   Boolean @default(true)
+}
+
+model Partner {
+  id        String  @id @default(cuid())
+  name      String
+  logo      String?
+  url       String?
+  sortOrder Int     @default(0)
+  visible   Boolean @default(true)
+}
+
+model FAQ {
+  id        String  @id @default(cuid())
+  question  String
+  answer    String
+  sortOrder Int     @default(0)
+  visible   Boolean @default(true)
+}
+
+model Submission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  message   String
+  source    String   @default("contact")
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model MediaAsset {
+  id        String   @id @default(cuid())
+  filename  String
+  url       String
+  alt       String?
+  mimeType  String
+  size      Int
+  createdAt DateTime @default(now())
+}
