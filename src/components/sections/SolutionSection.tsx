@@ -1,4 +1,4 @@
-import { Leaf, Clock, RotateCcw, Sparkles, Shield, ArrowLeftRight } from 'lucide-react'
+import { Leaf, Clock, RotateCcw, Shield, ArrowLeftRight } from 'lucide-react'
 
 export default function SolutionSection() {
   return (
@@ -54,34 +54,6 @@ export default function SolutionSection() {
           </div>
         </div>
 
-        {/* Uniqueness Points */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 reveal reveal-delay-2">
-          {[
-            {
-              icon: <Sparkles className="w-7 h-7 text-primary" />,
-              title: 'גישה הוליסטית',
-              desc: 'שילוב של עבודה לימודית, רגשית-חברתית וקהילתית בתהליך אחד מקיף ומותאם אישית.',
-            },
-            {
-              icon: <RotateCcw className="w-7 h-7 text-primary" />,
-              title: 'קבוצת בוגרים',
-              desc: 'החניכים ממשיכים להיות חלק מקהילת תלם לאדם גם אחרי סיום התהליך, לשמירה על התפקוד.',
-            },
-            {
-              icon: <Shield className="w-7 h-7 text-primary" />,
-              title: 'הדרכה הורית',
-              desc: 'הורי החניכים עוברים תהליך הדרכה הורית בגישת הסמכות החדשה, כחלק בלתי נפרד מהתהליך.',
-            },
-          ].map((item, i) => (
-            <div key={i} className="bg-white rounded-2xl p-8 shadow-sm border border-earth/20 hover:shadow-md transition-all group">
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
-                {item.icon}
-              </div>
-              <h3 className="text-lg font-bold text-secondary-dark mb-3">{item.title}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   )
