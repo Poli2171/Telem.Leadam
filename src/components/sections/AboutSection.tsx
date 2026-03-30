@@ -44,16 +44,16 @@ export default function AboutSection() {
             <p className="text-gray-600 leading-relaxed">
               למעלה מ-12 שנות ניסיון בעבודה עם נוער במצבי סיכון הובילו אותנו להקים את החווה — מקום שבו אדמה, אנשים ותהליך נפגשים.
             </p>
-            <div className="flex gap-8 pt-2">
-              <div>
+            <div className="flex justify-center md:justify-start gap-8 pt-2">
+              <div className="text-center md:text-right">
                 <p className="text-3xl font-black text-primary">6</p>
                 <p className="text-sm text-gray-500">חודשי תהליך</p>
               </div>
-              <div>
+              <div className="text-center md:text-right">
                 <p className="text-3xl font-black text-primary">13–17</p>
                 <p className="text-sm text-gray-500">גילאי הנוער</p>
               </div>
-              <div>
+              <div className="text-center md:text-right">
                 <p className="text-3xl font-black text-primary">3</p>
                 <p className="text-sm text-gray-500">מייסדים מנוסים</p>
               </div>
@@ -62,7 +62,7 @@ export default function AboutSection() {
         </div>
 
         {/* Values Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
           {[
             {
               icon: <Sprout className="w-8 h-8" />,
