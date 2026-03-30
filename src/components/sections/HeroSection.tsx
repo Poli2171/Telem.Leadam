@@ -31,7 +31,7 @@ export default function HeroSection() {
       <div className="absolute top-1/3 left-1/4 w-48 h-48 rounded-full bg-sky/10 blur-2xl" />
 
       {/* Content */}
-      <div className={`relative z-10 max-w-5xl mx-auto px-4 text-center pt-16 md:pt-0 transition-all duration-1000 ${
+      <div className={`relative z-10 max-w-5xl mx-auto px-4 text-center pt-20 md:pt-16 transition-all duration-1000 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}>
         {/* Badge */}
