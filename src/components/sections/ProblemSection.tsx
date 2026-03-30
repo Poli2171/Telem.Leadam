@@ -84,14 +84,14 @@ export default function ProblemSection() {
                 <div className="text-center mb-4">
                   <span className="text-sm text-gray-500">על כל נושר רשום</span>
                 </div>
-                <div className="flex items-center justify-center gap-3">
-                  <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
+                <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+                  <div className="w-14 h-14 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
                     <span className="text-2xl font-black text-red-600">1</span>
                   </div>
-                  <span className="text-2xl text-gray-300">→</span>
+                  <span className="text-2xl text-gray-300 rotate-90 sm:rotate-0">→</span>
                   <div className="flex gap-2">
                     {[1, 2, 3].map((n) => (
-                      <div key={n} className="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center border-2 border-dashed border-secondary/30">
+                      <div key={n} className="w-14 h-14 rounded-full bg-secondary/10 flex items-center justify-center border-2 border-dashed border-secondary/30">
                         <span className="text-lg font-bold text-secondary/60">?</span>
                       </div>
                     ))}
