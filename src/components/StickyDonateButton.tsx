@@ -2,12 +2,16 @@
 
 import { Heart } from 'lucide-react'
 
-export default function StickyDonateButton() {
-  const donationLink = process.env.NEXT_PUBLIC_DONATION_LINK || '#contact'
+type Props = {
+  donationLink?: string
+}
+
+export default function StickyDonateButton({ donationLink }: Props) {
+  const link = donationLink || process.env.NEXT_PUBLIC_DONATION_LINK || '#contact'
 
   return (
     <a
-      href={donationLink}
+      href={link}
       target="_blank"
       rel="noopener noreferrer"
       className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center gap-2 bg-primary text-white font-bold text-lg py-4 shadow-2xl border-t border-primary-dark/20 active:bg-primary-dark transition-colors"

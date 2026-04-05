@@ -1,13 +1,35 @@
 import { AlertTriangle, Eye, EyeOff, TrendingDown } from 'lucide-react'
 
-export default function ProblemSection() {
+type SectionContent = {
+  label?: string
+  headline?: string
+  stat_number?: string
+  stat_label?: string
+  hidden_dropout?: string
+  consequences?: string
+  gap?: string
+}
+
+type Props = {
+  content?: SectionContent
+}
+
+export default function ProblemSection({ content }: Props) {
+  const label = content?.label || 'הבעיה'
+  const headline = content?.headline || 'נשירה — המשבר השקט'
+  const statNumber = content?.stat_number || '90,000'
+  const statLabel = content?.stat_label || 'תלמידים ותלמידות נושרים בישראל'
+  const hiddenDropout = content?.hidden_dropout || 'על כל תלמיד נושר רשום, ישנם עוד שלושה נושרים סמויים — תלמידים הרשומים במסגרת חינוכית אך נעדרים פיזית או נפשית.'
+  const consequences = content?.consequences || 'תלמיד נושר עלול להידרדר לדפוס עברייני או לאי תפקוד, והתופעה משפיעה על החברה כולה בכל מימד.'
+  const gap = content?.gap || 'המסגרות הקיימות אינן עוסקות במניעת נשירה והשבת נערים למסגרת החינוכית, אלא מתמקדות במתן חלופה לבית הספר.'
+
   return (
     <section id="problem" className="section-padding bg-gradient-to-b from-earth-light/50 to-warm-bg">
       <div className="container-narrow">
         <div className="text-center mb-16 reveal">
-          <span className="inline-block text-secondary font-bold text-sm tracking-wide mb-3">הבעיה</span>
+          <span className="inline-block text-secondary font-bold text-sm tracking-wide mb-3">{label}</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-secondary-dark mb-6">
-            נשירה — <span className="text-gradient-earth">המשבר השקט</span>
+            <span className="text-gradient-earth">{headline}</span>
           </h2>
           <div className="w-20 h-1 bg-secondary/30 rounded-full mx-auto" />
         </div>
@@ -21,8 +43,8 @@ export default function ProblemSection() {
                   <AlertTriangle className="w-7 h-7 text-red-500" />
                 </div>
                 <div>
-                  <div className="text-4xl font-black text-secondary-dark">90,000</div>
-                  <div className="text-gray-500 text-sm">תלמידים ותלמידות נושרים בישראל</div>
+                  <div className="text-4xl font-black text-secondary-dark">{statNumber}</div>
+                  <div className="text-gray-500 text-sm">{statLabel}</div>
                 </div>
               </div>
 
@@ -33,9 +55,7 @@ export default function ProblemSection() {
                   </div>
                   <div>
                     <h4 className="font-bold text-secondary-dark mb-1">נושרים סמויים</h4>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      על כל תלמיד נושר רשום, ישנם עוד <strong className="text-secondary">שלושה נושרים סמויים</strong> — תלמידים הרשומים במסגרת חינוכית אך נעדרים פיזית או נפשית.
-                    </p>
+                    <p className="text-gray-600 text-sm leading-relaxed">{hiddenDropout}</p>
                   </div>
                 </div>
 
@@ -45,9 +65,7 @@ export default function ProblemSection() {
                   </div>
                   <div>
                     <h4 className="font-bold text-secondary-dark mb-1">הסכנות ברורות</h4>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      תלמיד נושר עלול להידרדר לדפוס עברייני או לאי תפקוד, והתופעה משפיעה על החברה כולה בכל מימד.
-                    </p>
+                    <p className="text-gray-600 text-sm leading-relaxed">{consequences}</p>
                   </div>
                 </div>
 
@@ -57,9 +75,7 @@ export default function ProblemSection() {
                   </div>
                   <div>
                     <h4 className="font-bold text-secondary-dark mb-1">החלופה הקיימת אינה מספקת</h4>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      המסגרות הקיימות אינן עוסקות במניעת נשירה והשבת נערים למסגרת החינוכית, אלא מתמקדות במתן חלופה לבית הספר.
-                    </p>
+                    <p className="text-gray-600 text-sm leading-relaxed">{gap}</p>
                   </div>
                 </div>
               </div>

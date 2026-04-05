@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Heebo } from 'next/font/google'
+import { prisma } from '@/lib/prisma'
 import './globals.css'
 
 const heebo = Heebo({
@@ -9,16 +10,21 @@ const heebo = Heebo({
   display: 'swap',
 })
 
-export const metadata: Metadata = {
-  title: 'תלם לאדם - מטפלים מהשורש | חווה חקלאית חינוכית-טיפולית',
-  description: 'חווה חקלאית חינוכית-טיפולית למניעת נשירה ואי תפקוד של בני ובנות נוער בגילאי 13-17. תהליך של חצי שנה המשלב עבודת אדמה, סדנאות, הדרכה הורית וחזרה למסגרת חינוכית.',
-  keywords: ['תלם לאדם', 'נשירה', 'נוער', 'חווה חקלאית', 'טיפולי', 'חינוכי', 'הורים', 'מטפלים מהשורש'],
-  openGraph: {
-    title: 'תלם לאדם - מטפלים מהשורש',
-    description: 'חווה חקלאית חינוכית-טיפולית למניעת נשירה ואי תפקוד של בני ובנות נוער',
-    type: 'website',
-    locale: 'he_IL',
-  },
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await prisma.siteSettings.findUnique({ where: { id: 'main' } })
+
+  return {
+    title: settings?.seoTitle || 'תלם לאדם - מטפלים מהשורש | חווה חקלאית חינוכית-טיפולית',
+    description: settings?.seoDescription || 'חווה חקלאית חינוכית-טיפולית למניעת נשירה ואי תפקוד של בני ובנות נוער בגילאי 13-17. תהליך של חצי שנה המשלב עבודת אדמה, סדנאות, הדרכה הורית וחזרה למסגרת חינוכית.',
+    keywords: ['תלם לאדם', 'נשירה', 'נוער', 'חווה חקלאית', 'טיפולי', 'חינוכי', 'הורים', 'מטפלים מהשורש'],
+    openGraph: {
+      title: settings?.seoTitle || 'תלם לאדם - מטפלים מהשורש',
+      description: settings?.seoDescription || 'חווה חקלאית חינוכית-טיפולית למניעת נשירה ואי תפקוד של בני ובנות נוער',
+      ...(settings?.ogImage ? { images: [settings.ogImage] } : {}),
+      type: 'website',
+      locale: 'he_IL',
+    },
+  }
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

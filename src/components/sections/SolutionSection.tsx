@@ -1,17 +1,35 @@
 import { Leaf, Clock, RotateCcw, Shield, ArrowLeftRight } from 'lucide-react'
 
-export default function SolutionSection() {
+type SectionContent = {
+  label?: string
+  headline?: string
+  description?: string
+  main_message?: string
+  duration?: string
+}
+
+type Props = {
+  content?: SectionContent
+}
+
+export default function SolutionSection({ content }: Props) {
+  const label = content?.label || 'הגישה שלנו'
+  const headline = content?.headline || 'טירונות לחיים — המודל של תלם לאדם'
+  const description = content?.description || 'תוכנית ייחודית והוליסטית שאורכת כחצי שנה, המשלבת נערים, הורים והמסגרת החינוכית — ונועדה להחזיר לנערים בני 13-17 את האמונה בעצמם ולספק להם כלים לחזור לתפקוד.'
+  const mainMessage = content?.main_message || 'לא להחליף את המסגרת — אלא להחזיר אליה'
+  const duration = content?.duration || 'תהליך של כחצי שנה'
+
   return (
     <section id="solution" className="section-padding bg-warm-bg">
       <div className="container-narrow">
         <div className="text-center mb-16 reveal">
-          <span className="inline-block text-primary font-bold text-sm tracking-wide mb-3">הגישה שלנו</span>
+          <span className="inline-block text-primary font-bold text-sm tracking-wide mb-3">{label}</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-secondary-dark mb-6">
-            <span className="text-gradient-green">טירונות לחיים</span> — המודל של תלם לאדם
+            <span className="text-gradient-green">{headline}</span>
           </h2>
           <div className="w-20 h-1 bg-primary/30 rounded-full mx-auto mb-8" />
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            תוכנית ייחודית והוליסטית שאורכת כחצי שנה, המשלבת נערים, הורים והמסגרת החינוכית — ונועדה להחזיר לנערים בני 13-17 את האמונה בעצמם ולספק להם כלים לחזור לתפקוד.
+            {description}
           </p>
         </div>
 
@@ -25,10 +43,10 @@ export default function SolutionSection() {
             <div>
               <div className="inline-flex items-center gap-2 bg-white/15 rounded-full px-4 py-1.5 mb-6">
                 <Clock className="w-4 h-4" />
-                <span className="text-sm font-medium">תהליך של כחצי שנה</span>
+                <span className="text-sm font-medium">{duration}</span>
               </div>
               <h3 className="text-2xl md:text-3xl font-bold mb-4 leading-tight">
-                לא להחליף את המסגרת — אלא להחזיר אליה
+                {mainMessage}
               </h3>
               <p className="text-white/80 text-lg leading-relaxed">
                 בניגוד למסגרות הקיימות המתמקדות במתן חלופה לבית הספר, אנחנו מאמינים שהמטרה היא להחזיר את הנערים למסלול חיים תפקודי. כולל ליווי תהליכי שלהם ושל הוריהם גם לאחר ההשתלבות חזרה.

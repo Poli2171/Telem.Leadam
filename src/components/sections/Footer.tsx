@@ -1,6 +1,21 @@
 import Image from 'next/image'
 import { Heart, Phone, Mail, MapPin } from 'lucide-react'
 
+type Settings = {
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  footerText?: string | null
+  facebook?: string | null
+  instagram?: string | null
+  whatsapp?: string | null
+}
+
+type Props = {
+  settings?: Settings | null
+  donationLink?: string
+}
+
 const quickLinks = [
   { label: 'אודות', href: '#about' },
   { label: 'הגישה שלנו', href: '#solution' },
@@ -11,7 +26,13 @@ const quickLinks = [
   { label: 'צרו קשר', href: '#contact' },
 ]
 
-export default function Footer() {
+export default function Footer({ settings, donationLink }: Props) {
+  const phone = settings?.phone || '054-XXX-XXXX'
+  const email = settings?.email || 'info@telem-leadam.org.il'
+  const address = settings?.address || 'ישראל'
+  const footerText = settings?.footerText || 'חווה חקלאית חינוכית-טיפולית למניעת נשירה ואי תפקוד של בני ובנות נוער בגילאי 13-17. מחזירים לנערים את האמונה בעצמם.'
+  const donation = donationLink || '#contact'
+
   return (
     <footer className="bg-secondary-dark text-white">
       <div className="container-narrow section-padding pb-8">
@@ -26,10 +47,10 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-white/70 leading-relaxed text-sm mb-6">
-              חווה חקלאית חינוכית-טיפולית למניעת נשירה ואי תפקוד של בני ובנות נוער בגילאי 13-17. מחזירים לנערים את האמונה בעצמם.
+              {footerText}
             </p>
             <a
-              href={process.env.NEXT_PUBLIC_DONATION_LINK || '#contact'}
+              href={donation}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-6 py-2.5 rounded-xl text-sm font-medium transition-colors"
@@ -61,15 +82,15 @@ export default function Footer() {
             <div className="space-y-4">
               <div className="flex items-center gap-3 text-white/70 text-sm">
                 <Phone className="w-4 h-4 flex-shrink-0" />
-                <span dir="ltr">054-XXX-XXXX</span>
+                <span dir="ltr">{phone}</span>
               </div>
               <div className="flex items-center gap-3 text-white/70 text-sm">
                 <Mail className="w-4 h-4 flex-shrink-0" />
-                <span>info@telem-leadam.org.il</span>
+                <span>{email}</span>
               </div>
               <div className="flex items-center gap-3 text-white/70 text-sm">
                 <MapPin className="w-4 h-4 flex-shrink-0" />
-                <span>ישראל</span>
+                <span>{address}</span>
               </div>
             </div>
 
@@ -77,14 +98,30 @@ export default function Footer() {
             <div className="mt-6">
               <h5 className="text-sm font-medium mb-3 text-white/50">עקבו אחרינו</h5>
               <div className="flex gap-3">
-                {['Facebook', 'Instagram', 'WhatsApp'].map((social) => (
-                  <div
-                    key={social}
-                    className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white/50 text-xs hover:bg-white/20 transition-colors cursor-pointer"
-                  >
-                    {social[0]}
-                  </div>
-                ))}
+                {settings?.facebook ? (
+                  <a href={settings.facebook} target="_blank" rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white/70 text-xs hover:bg-white/20 transition-colors">
+                    F
+                  </a>
+                ) : (
+                  <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white/50 text-xs hover:bg-white/20 transition-colors cursor-pointer">F</div>
+                )}
+                {settings?.instagram ? (
+                  <a href={settings.instagram} target="_blank" rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white/70 text-xs hover:bg-white/20 transition-colors">
+                    I
+                  </a>
+                ) : (
+                  <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white/50 text-xs hover:bg-white/20 transition-colors cursor-pointer">I</div>
+                )}
+                {settings?.whatsapp ? (
+                  <a href={`https://wa.me/${settings.whatsapp.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white/70 text-xs hover:bg-white/20 transition-colors">
+                    W
+                  </a>
+                ) : (
+                  <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white/50 text-xs hover:bg-white/20 transition-colors cursor-pointer">W</div>
+                )}
               </div>
             </div>
           </div>

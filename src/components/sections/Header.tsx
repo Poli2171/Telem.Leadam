@@ -20,10 +20,15 @@ const navLinks = [
 
 const sectionIds = navLinks.map((l) => l.id)
 
-export default function Header() {
+type Props = {
+  donationLink?: string
+}
+
+export default function Header({ donationLink }: Props) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const activeSection = useActiveSection(sectionIds)
+  const donation = donationLink || '#contact'
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20)
@@ -88,7 +93,7 @@ export default function Header() {
         {/* CTA + Mobile Toggle */}
         <div className="flex items-center gap-3">
           <a
-            href={process.env.NEXT_PUBLIC_DONATION_LINK || '#contact'}
+            href={donation}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -132,7 +137,7 @@ export default function Header() {
               </button>
             ))}
             <a
-              href={process.env.NEXT_PUBLIC_DONATION_LINK || '#contact'}
+              href={donation}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-2"

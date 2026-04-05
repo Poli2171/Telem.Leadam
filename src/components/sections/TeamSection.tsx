@@ -1,33 +1,57 @@
 import { Briefcase } from 'lucide-react'
 
-const founders = [
+type TeamMember = {
+  id: string
+  name: string
+  role: string
+  bio: string
+  image?: string | null
+  sortOrder: number
+}
+
+const gradients = [
+  'from-primary to-primary-dark',
+  'from-secondary to-secondary-dark',
+  'from-accent-dark to-primary',
+]
+
+function getInitials(name: string): string {
+  const parts = name.trim().split(' ')
+  if (parts.length >= 2) return `${parts[0][0]}.${parts[parts.length - 1][0]}`
+  return parts[0].slice(0, 2)
+}
+
+const defaultMembers = [
   {
+    id: '1',
     name: 'איתי קסטרו',
-    age: '37',
     role: 'מייסד ומנהל חינוכי',
     bio: 'מורה, מחנך ומדריך הורים. בעל תואר שני בחינוך, תעודת הוראה, ומדריך הורים מוסמך בגישת ה"סמכות החדשה". בעל ניסיון עשיר של 12 שנים בעבודה עם נוער במצבי סיכון. בעבר ניהל את התכנית החינוכית "בשביל" בהרצליה ואת מכינת נחשון בקיבוץ שובל. לאחר מספר שנים כמחנך כיתות אומץ, איתי החליט ליזום תכנית חינוכית-טיפולית הוליסטית וחדשנית למניעת נשירה.',
-    initials: 'א.ק',
-    gradient: 'from-primary to-primary-dark',
+    sortOrder: 0,
   },
   {
+    id: '2',
     name: 'עידו פוליצר',
-    age: '35',
     role: 'מייסד ומנכ"ל העמותה',
     bio: 'בעל רקע עשיר בניהול פרויקטים, קרנות נדל"ן וייעוץ אסטרטגי לתשתיות. בוגר תואר ראשון בכלכלה עם התמחות במימון. האיש שמתרגם את החזון החינוכי למציאות בת-קיימא. אמון על הקמת התשתית הפיזית ובניית המודל הכלכלי, מתוך תפיסה שיציבות תפעולית ופיננסית היא הבסיס לביטחון הרגשי של בני הנוער.',
-    initials: 'ע.פ',
-    gradient: 'from-secondary to-secondary-dark',
+    sortOrder: 1,
   },
   {
+    id: '3',
     name: 'חנוך טיאר',
-    age: '42',
     role: 'מייסד ורכז פדגוגי',
     bio: 'מורה ומוזיקאי-יוצר. בעל תואר ראשון בחינוך ומקרא ותעודת הוראה. ניסיון של כ-15 שנה בחינוך פורמאלי ובלתי פורמאלי, עם התמחות בחטיבת הביניים. יוצר ומנחה סדנאות כתיבה יוצרת בנושא זהות, המהוות נדבך רגשי וחינוכי משמעותי בתכנית החווה.',
-    initials: 'ח.ט',
-    gradient: 'from-accent-dark to-primary',
+    sortOrder: 2,
   },
 ]
 
-export default function TeamSection() {
+type Props = {
+  members?: TeamMember[]
+}
+
+export default function TeamSection({ members }: Props) {
+  const displayMembers = members && members.length > 0 ? members : defaultMembers
+
   return (
     <section id="team" className="section-padding bg-gradient-to-b from-warm-bg to-earth-light/30">
       <div className="container-narrow">
@@ -43,35 +67,39 @@ export default function TeamSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {founders.map((founder, i) => (
-            <div
-              key={i}
-              className={`reveal reveal-delay-${i + 1} bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-earth/20 group`}
-            >
-              {/* Avatar Header */}
-              <div className={`bg-gradient-to-br ${founder.gradient} p-8 text-center relative`}>
-                <div className="absolute inset-0 opacity-10">
-                  <div className="absolute top-4 right-4 w-20 h-20 rounded-full bg-white/20" />
-                  <div className="absolute bottom-4 left-4 w-16 h-16 rounded-full bg-white/10" />
-                </div>
-                <div className="relative">
-                  <div className="w-24 h-24 rounded-full bg-white/20 backdrop-blur-sm mx-auto flex items-center justify-center border-3 border-white/30 mb-4">
-                    <span className="text-3xl font-black text-white">{founder.initials}</span>
+          {displayMembers.map((member, i) => {
+            const gradient = gradients[i % gradients.length]
+            const initials = getInitials(member.name)
+            return (
+              <div
+                key={member.id}
+                className={`reveal reveal-delay-${Math.min(i + 1, 5)} bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-earth/20 group`}
+              >
+                {/* Avatar Header */}
+                <div className={`bg-gradient-to-br ${gradient} p-8 text-center relative`}>
+                  <div className="absolute inset-0 opacity-10">
+                    <div className="absolute top-4 right-4 w-20 h-20 rounded-full bg-white/20" />
+                    <div className="absolute bottom-4 left-4 w-16 h-16 rounded-full bg-white/10" />
                   </div>
-                  <h3 className="text-xl font-bold text-white">{founder.name}</h3>
-                  <div className="flex items-center justify-center gap-2 mt-2">
-                    <Briefcase className="w-4 h-4 text-white/70" />
-                    <span className="text-white/80 text-sm">{founder.role}</span>
+                  <div className="relative">
+                    <div className="w-24 h-24 rounded-full bg-white/20 backdrop-blur-sm mx-auto flex items-center justify-center border-3 border-white/30 mb-4">
+                      <span className="text-3xl font-black text-white">{initials}</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-white">{member.name}</h3>
+                    <div className="flex items-center justify-center gap-2 mt-2">
+                      <Briefcase className="w-4 h-4 text-white/70" />
+                      <span className="text-white/80 text-sm">{member.role}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Bio */}
-              <div className="p-6">
-                <p className="text-gray-600 text-sm leading-relaxed">{founder.bio}</p>
+                {/* Bio */}
+                <div className="p-6">
+                  <p className="text-gray-600 text-sm leading-relaxed">{member.bio}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

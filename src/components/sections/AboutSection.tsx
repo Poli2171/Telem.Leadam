@@ -1,18 +1,32 @@
 import Image from 'next/image'
 import { Sprout, Users, GraduationCap, HeartHandshake } from 'lucide-react'
 
-export default function AboutSection() {
+type SectionContent = {
+  label?: string
+  headline?: string
+  description?: string
+}
+
+type Props = {
+  content?: SectionContent
+}
+
+export default function AboutSection({ content }: Props) {
+  const label = content?.label || 'מי אנחנו'
+  const headline = content?.headline || 'תלם לאדם — מטפלים מהשורש'
+  const description = content?.description || '״תלם לאדם״ היא חווה חקלאית חינוכית-טיפולית שנועדה למנוע נשירה ואי תפקוד של בני ובנות נוער בגילאי 13-17. אנחנו מציעים תוכנית ייחודית והוליסטית — מעין ״טירונות לחיים״ — שמשלבת עבודת אדמה, סדנאות חווייתיות, הדרכה הורית ועבודה עם המסגרת החינוכית.'
+
   return (
     <section id="about" className="section-padding bg-warm-bg nature-pattern">
       <div className="container-narrow">
         <div className="text-center mb-16 reveal">
-          <span className="inline-block text-primary font-bold text-sm tracking-wide mb-3">מי אנחנו</span>
+          <span className="inline-block text-primary font-bold text-sm tracking-wide mb-3">{label}</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-secondary-dark mb-6">
-            תלם לאדם — <span className="text-gradient-green">מטפלים מהשורש</span>
+            <span className="text-gradient-green">{headline}</span>
           </h2>
           <div className="w-20 h-1 bg-primary/30 rounded-full mx-auto mb-8" />
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            &ldquo;תלם לאדם&rdquo; היא חווה חקלאית חינוכית-טיפולית שנועדה למנוע נשירה ואי תפקוד של בני ובנות נוער בגילאי 13-17. אנחנו מציעים תוכנית ייחודית והוליסטית — מעין &ldquo;טירונות לחיים&rdquo; — שמשלבת עבודת אדמה, סדנאות חווייתיות, הדרכה הורית ועבודה עם המסגרת החינוכית.
+            {description}
           </p>
         </div>
 

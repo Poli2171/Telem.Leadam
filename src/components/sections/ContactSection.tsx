@@ -7,9 +7,25 @@ import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Send, Phone, Mail, MapPin, MessageCircle, CheckCircle2 } from 'lucide-react'
 
-export default function ContactSection() {
+type Settings = {
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  whatsapp?: string | null
+}
+
+type Props = {
+  settings?: Settings | null
+}
+
+export default function ContactSection({ settings }: Props) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+
+  const phone = settings?.phone || '054-XXX-XXXX'
+  const email = settings?.email || 'info@telem-leadam.org.il'
+  const address = settings?.address || 'ישראל'
+  const whatsapp = settings?.whatsapp
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -69,7 +85,7 @@ export default function ContactSection() {
                     </div>
                     <div>
                       <div className="text-sm text-white/60 mb-1">טלפון</div>
-                      <div className="font-medium" dir="ltr">054-XXX-XXXX</div>
+                      <div className="font-medium" dir="ltr">{phone}</div>
                     </div>
                   </div>
 
@@ -79,7 +95,7 @@ export default function ContactSection() {
                     </div>
                     <div>
                       <div className="text-sm text-white/60 mb-1">אימייל</div>
-                      <div className="font-medium">info@telem-leadam.org.il</div>
+                      <div className="font-medium">{email}</div>
                     </div>
                   </div>
 
@@ -89,7 +105,7 @@ export default function ContactSection() {
                     </div>
                     <div>
                       <div className="text-sm text-white/60 mb-1">כתובת</div>
-                      <div className="font-medium">ישראל</div>
+                      <div className="font-medium">{address}</div>
                     </div>
                   </div>
 
@@ -99,7 +115,13 @@ export default function ContactSection() {
                     </div>
                     <div>
                       <div className="text-sm text-white/60 mb-1">WhatsApp</div>
-                      <div className="font-medium">שלחו לנו הודעה</div>
+                      {whatsapp ? (
+                        <a href={`https://wa.me/${whatsapp.replace(/\D/g, '')}`} className="font-medium hover:underline">
+                          שלחו לנו הודעה
+                        </a>
+                      ) : (
+                        <div className="font-medium">שלחו לנו הודעה</div>
+                      )}
                     </div>
                   </div>
                 </div>

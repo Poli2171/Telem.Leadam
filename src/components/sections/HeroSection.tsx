@@ -5,12 +5,36 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { ArrowDown, Heart, Sprout } from 'lucide-react'
 
-export default function HeroSection() {
+type SectionContent = {
+  badge?: string
+  headline?: string
+  subheadline?: string
+  description?: string
+  cta_primary?: string
+  cta_secondary?: string
+  quote?: string
+}
+
+type Props = {
+  content?: SectionContent
+  donationLink?: string
+}
+
+export default function HeroSection({ content, donationLink }: Props) {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     setIsVisible(true)
   }, [])
+
+  const badge = content?.badge || 'חווה חקלאית חינוכית-טיפולית'
+  const headline = content?.headline || 'מטפלים מהשורש'
+  const subheadline = content?.subheadline || 'מחזירים לנערים ונערות את האמונה בעצמם'
+  const description = content?.description || 'חווה למניעת נשירה ואי תפקוד של בני ובנות נוער בגילאי 13-17, באמצעות עבודת אדמה, סדנאות מגוונות, הדרכה הורית וחזרה למסגרת חינוכית'
+  const ctaPrimary = content?.cta_primary || 'גלו את הסיפור שלנו'
+  const ctaSecondary = content?.cta_secondary || 'תרומה'
+  const quote = content?.quote || 'מטרת העל שלנו היא לא להשאיר את הנערים אצלנו לנצח, אלא להחזיר אותם למסלול כשהם עומדים זקופים, בטוחים ומאמינים.'
+  const donation = donationLink || '#contact'
 
   return (
     <section id="hero" className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
@@ -37,43 +61,42 @@ export default function HeroSection() {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm rounded-full px-5 py-2 mb-8">
           <Sprout className="w-4 h-4 text-accent-light" />
-          <span className="text-white/90 text-sm font-medium">חווה חקלאית חינוכית-טיפולית</span>
+          <span className="text-white/90 text-sm font-medium">{badge}</span>
         </div>
 
         {/* Main Headline */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-6">
-          מטפלים{' '}
-          <span className="relative inline-block">
-            מהשורש
-            <span className="absolute -bottom-2 left-0 right-0 h-1.5 bg-accent rounded-full opacity-70" />
-          </span>
+          {headline.includes('מהשורש') ? (
+            <>
+              {headline.replace('מהשורש', '').trim()}{' '}
+              <span className="relative inline-block">
+                מהשורש
+                <span className="absolute -bottom-2 left-0 right-0 h-1.5 bg-accent rounded-full opacity-70" />
+              </span>
+            </>
+          ) : headline}
         </h1>
 
         {/* Sub-headline */}
         <p className="text-xl sm:text-2xl md:text-3xl text-white/90 font-light mb-4 leading-relaxed max-w-3xl mx-auto">
-          מחזירים לנערים ונערות את האמונה בעצמם
+          {subheadline}
         </p>
 
         <p className="text-base sm:text-lg text-white/70 mb-10 max-w-2xl mx-auto leading-relaxed">
-          חווה למניעת נשירה ואי תפקוד של בני ובנות נוער בגילאי 13-17,
-          באמצעות עבודת אדמה, סדנאות מגוונות, הדרכה הורית וחזרה למסגרת חינוכית
+          {description}
         </p>
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
           <a href="#about">
             <Button size="xl" className="bg-white text-primary hover:bg-white/90 shadow-xl text-lg px-10">
-              גלו את הסיפור שלנו
+              {ctaPrimary}
             </Button>
           </a>
-          <a
-            href={process.env.NEXT_PUBLIC_DONATION_LINK || '#contact'}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={donation} target="_blank" rel="noopener noreferrer">
             <Button size="xl" variant="outline" className="border-white/40 text-white hover:bg-white/10 text-lg px-10">
               <Heart className="w-5 h-5 ml-2" />
-              תרומה
+              {ctaSecondary}
             </Button>
           </a>
         </div>
@@ -81,7 +104,7 @@ export default function HeroSection() {
         {/* Quote */}
         <div className="max-w-2xl mx-auto bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
           <p className="text-white/90 text-lg italic leading-relaxed">
-            &ldquo;מטרת העל שלנו היא לא להשאיר את הנערים אצלנו לנצח, אלא להחזיר אותם למסלול כשהם עומדים זקופים, בטוחים ומאמינים.&rdquo;
+            &ldquo;{quote}&rdquo;
           </p>
         </div>
 
